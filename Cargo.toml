@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = ["packages/core", "packages/macros"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/anthropics/shipkit"
+description = "Production-ready building blocks for Tauri 2 desktop applications"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "warn"
