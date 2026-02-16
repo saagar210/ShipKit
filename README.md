@@ -58,9 +58,34 @@ ShipKit/
 # Install dependencies
 pnpm install
 
-# Run in dev mode
+# Run in normal dev mode (faster warm rebuilds, more disk usage)
 cd apps/desktop
 pnpm tauri dev
+```
+
+### Lean Dev Mode (Low Disk)
+
+```bash
+cd apps/desktop
+pnpm lean:dev
+```
+
+`pnpm lean:dev` still starts the app with `pnpm tauri dev`, but redirects heavy build caches to a temporary directory and cleans heavy artifacts automatically when the process exits.
+
+Tradeoff:
+- Normal dev keeps build outputs in the repo (`target`, Vite cache) for faster rebuilds.
+- Lean dev reuses dependencies but discards heavy build artifacts on exit, so startup/rebuilds are slower while disk usage stays lower.
+
+### Cleanup Commands
+
+```bash
+cd apps/desktop
+
+# Remove heavy build artifacts only (keeps dependencies installed)
+pnpm clean:heavy
+
+# Remove all reproducible local caches/artifacts (including node_modules)
+pnpm clean:full
 ```
 
 ### Use the Core Library
